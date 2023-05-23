@@ -1,0 +1,1 @@
+(()=>{"use strict";window.Widget={button:function(t){var e=document.createElement("button");return e.textContent=t.label,e.onclick=t.onClick,{el:e}},list:createList}})();
