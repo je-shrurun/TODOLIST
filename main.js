@@ -10,14 +10,14 @@ renderDoneList();
 var inputBtnEl = document.getElementById("todo-input")
 var contentsEl = document.getElementById("todo-contents")
 
-var containerEl = document.getElementById("container");
-
+var todo_containerEl = document.getElementById("todo_container");
+var done_containerEl = document.getElementById("done_container");
 
 
 var inputControl = Widget.input({
     
 });
-containerEl.append(inputControl.el);
+todo_containerEl.append(inputControl.el);
 
 var sampleControl = Widget.button({
     label: "샘플",
@@ -51,7 +51,7 @@ var inputBtnClick = Widget.button({
         inputControl.el.focus();
     }
 });
-containerEl.append(inputBtnClick.el)
+todo_containerEl.append(inputBtnClick.el)
 
 
 var todolistControl = Widget.list({
@@ -63,7 +63,7 @@ var todolistControl = Widget.list({
 
  ],
 });
-containerEl.append(todolistControl.el);
+todo_containerEl.append(todolistControl.el);
 
 var donelistControl = Widget.list({
     datas: getSortedTodoList({ done: true }),
@@ -74,7 +74,7 @@ var donelistControl = Widget.list({
 
  ],
 });
-containerEl.append(donelistControl.el);
+done_containerEl.append(donelistControl.el);
 
 
 function renderTodoList() {}
@@ -119,10 +119,13 @@ function renderDoneList(){
 
 function checkbox (data){
     var checkboxControl = Widget.checkbox({
-        checked: false,
+        done: data.done,
         onChange: function(e){
             data.done = e.target.checked;
+            todolistControl.reload(getSortedTodoList({ done: false }));
+            donelistControl.reload(getSortedTodoList({ done: true }));
         },
+        
     });
     return checkboxControl.el
 };
@@ -149,3 +152,5 @@ return delBtnControl.el
 
 function getSortedTodoList(option) {
     return todolist.filter(item => item.done === option.done)}
+
+
