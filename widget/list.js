@@ -21,7 +21,7 @@ export function createList(option){
             var liEl = document.createElement("li");
     
             //
-            option.forEach(function (column){
+            columns.forEach(function (column){
                 var control = column.render(data);
                 liEl.append(control);
             });
@@ -30,4 +30,6 @@ export function createList(option){
         });
     }
 }
+
+
 
